@@ -7,12 +7,12 @@ namespace MockAssessment5.Controllers
 {
     public class HomeController : Controller
     {
-         List<PersonViewModel> _person;
+         PersonViewModel _person;
          private readonly ILogger<HomeController> _logger;
 
          public HomeController(ILogger<HomeController> logger)
         {
-             _person = new List<PersonViewModel>();
+             _person = new PersonViewModel();
             _logger = logger;
         }
         //public HomeController()
@@ -26,10 +26,18 @@ namespace MockAssessment5.Controllers
             return View();
         }
 
-        public IActionResult Result(PersonViewModel _person)
+        public IActionResult Result(PersonViewModel person)
         {
+            if (person.Age >= 16)
+            {
+                person.CanDrive = true;
+            }
+            if (person.Age >= 21)
+            {
+                person.CanDrink = true;
+            }
 
-            return View(_person);
+            return View(person);
         }
 
         public IActionResult GetAge()
@@ -57,7 +65,7 @@ namespace MockAssessment5.Controllers
             {
                 person.CanDrink = true;
             }
-            _person.Add(person);
+            _person = person;
 
             return View("Result", _person);
         }
