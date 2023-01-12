@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MockAssessment5.Models.PersonViewModel>
+
+@{
+    ViewData["Title"] = "Result";
+}
+
+<h1>Result</h1>
+
+@foreach (var person in Model) {
+    <p>
+        Name = @Html.DisplayFor(modelItem => person.UserName)
+    </p>
+    <p>
+        Age = @Html.DisplayFor(modelItem => person.Age)
+    </p>
+    @if (person.CanDrive == true)
+    {
+        <p>This person can drive</p>
+    }
+    @if (person.CanDrink == true)
+    {
+        <h2>This person can Drink</h2>
+    }
+    else
+    {
+        <h1>This Person is too young to drink</h1>
+    }
+}
+
